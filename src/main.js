@@ -4,7 +4,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import Router from 'vue-router';
 import App from './App.vue';
 import 'font-awesome/css/font-awesome.min.css';
-import 'vue-quill-editor' //调用编辑器
+
+
 
 
 Vue.use(ElementUI);

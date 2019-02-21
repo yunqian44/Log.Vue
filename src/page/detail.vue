@@ -8,11 +8,13 @@
                 </div>
     </el-col>
     <el-col :span="24" class="main">
-     <quill-editor v-model="infoForm.a_content"
-              ref="myQuillEditor"
-              class="editer"
-              >
-       </quill-editor>
+    <quillEditor
+            v-model="content" 
+            ref="myQuillEditor" 
+            :options="editorOption" 
+            @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
+            @change="onEditorChange($event)">
+        </quillEditor>
    </el-col>
  </el-row>
 </div>
@@ -20,27 +22,35 @@
 </template>
 
 <script>
-import UE from "./../components/ue.vue"; //调用编辑器
+import { quillEditor } from "vue-quill-editor";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 
 export default {
   data() {
     return {
-      infoForm: {
-        a_title: "",
-        a_source: "",
-        a_content: "",
-        editorOption: {}
-      },
+      content: null,
+      editorOption: {},
       message: "张三"
     };
   },
   methods: {
     closeDialog() {
       this.show = false;
+    },
+    onEditorBlur() {
+      //失去焦点事件
+    },
+    onEditorFocus() {
+      //获得焦点事件
+    },
+    onEditorChange() {
+      //内容改变事件
     }
   },
-  omponents: {
-    "quill-editor": UE
+  components: {
+   quillEditor
   }
 };
 </script>
@@ -49,5 +59,8 @@ export default {
 .title {
   font-size: 32px;
   text-align: center;
+}
+.quill-editor{
+  height: 300px;
 }
 </style>

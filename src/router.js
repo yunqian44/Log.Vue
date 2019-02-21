@@ -8,6 +8,7 @@ import home from './page/home.vue'
 import detail from './page/detail.vue'
 
 
+
 Vue.use(VueRouter);// 要告诉 vue 使用 vueRouter
 
 let routes = [{
