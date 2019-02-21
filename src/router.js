@@ -5,6 +5,7 @@ import VueRouter from "vue-router"
 
 import login from './page/login.vue'
 import home from './page/home.vue'
+import detail from './page/detail.vue'
 
 
 Vue.use(VueRouter);// 要告诉 vue 使用 vueRouter
@@ -18,9 +19,14 @@ let routes = [{
     {
         path: '/',
         component: home,
-        name: '导航一',
+        name: '首页',
         iconCls: 'el-icon-message', //图标样式class
-    },
+        children: [{
+            path: '/detail',
+            component: detail,
+            name: '详情'
+        }]
+    }
 ];
 var router = new VueRouter({
     routes//这里可以带有路由器的配置参数
