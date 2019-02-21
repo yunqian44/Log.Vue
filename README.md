@@ -1,7 +1,7 @@
 # Log.Vue
 
 #### 介绍
-日志管理 A Vue.js project
+日志管理   A Vue.js project
 
 #### 软件架构
 软件架构说明
