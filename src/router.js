@@ -9,6 +9,7 @@ import detail from './page/detail.vue'
 import index from './page/admin/Log/index.vue'
 import logList from './page/admin/Log/logList.vue'
 import addorEditLog from './page/admin/Log/addOrEditLog.vue'
+import userList from './page/admin/User/userList.vue'
 
 
 Vue.use(VueRouter);// 要告诉 vue 使用 vueRouter
@@ -45,6 +46,18 @@ let routes = [{
             path: '/admin/addOrEditLog',
             component: addorEditLog,
             name: '录入编辑',
+            iconCls: 'el-icon-menu'
+        }]
+    },
+    {
+        path: '/admin',
+        component: index,
+        name: '系统管理',
+        iconCls: 'el-icon-setting', //图标样式class
+        children: [{
+            path: '/admin/userList',
+            component: userList,
+            name: '用户管理',
             iconCls: 'el-icon-menu'
         }]
     }
