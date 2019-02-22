@@ -6,7 +6,9 @@ import VueRouter from "vue-router"
 import login from './page/login.vue'
 import home from './page/home.vue'
 import detail from './page/detail.vue'
-
+import index from './page/admin/Log/index.vue'
+import logList from './page/admin/Log/logList.vue'
+import addorEditLog from './page/admin/Log/addOrEditLog.vue'
 
 
 Vue.use(VueRouter);// 要告诉 vue 使用 vueRouter
@@ -26,6 +28,24 @@ let routes = [{
             path: '/detail',
             component: detail,
             name: '详情'
+        }],
+        hidden: true
+    },
+    {
+        path: '/admin',
+        component: index,
+        name: '后台首页',
+        iconCls: 'el-icon-menu', //图标样式class
+        children: [{
+            path: '/admin/logList',
+            component: logList,
+            name: '日志列表',
+            iconCls: 'el-icon-menu'
+        },{
+            path: '/admin/addOrEditLog',
+            component: addorEditLog,
+            name: '录入编辑',
+            iconCls: 'el-icon-menu'
         }]
     }
 ];

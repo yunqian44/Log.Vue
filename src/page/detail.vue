@@ -8,13 +8,7 @@
                 </div>
     </el-col>
     <el-col :span="24" class="main">
-    <quillEditor
-            v-model="content" 
-            ref="myQuillEditor" 
-            :options="editorOption" 
-            @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)">
-        </quillEditor>
+
    </el-col>
  </el-row>
 </div>
@@ -36,9 +30,6 @@ export default {
     };
   },
   methods: {
-    closeDialog() {
-      this.show = false;
-    },
     onEditorBlur() {
       //失去焦点事件
     },
@@ -59,8 +50,5 @@ export default {
 .title {
   font-size: 32px;
   text-align: center;
-}
-.quill-editor{
-  height: 300px;
 }
 </style>

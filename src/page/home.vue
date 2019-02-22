@@ -10,9 +10,10 @@
             </el-col>
             <el-col 
             :span="4" class="userinfo">
-                <el-dropdown trigger="hover">
+                    <span class="el-dropdown-link userinfo-inner"  @click="$router.push({path:'/login'})" v-if="loginBtnVisible">登 录</span>
+                <el-dropdown trigger="hover" v-if="userBtnVisible">
                     <span class="el-dropdown-link userinfo-inner">{{sysUserName}}</span>
-                    <el-dropdown-menu slot="dropdown" v-if="loginVisible">
+                    <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>我的消息</el-dropdown-item>
                         <el-dropdown-item>设置</el-dropdown-item>
                         <el-dropdown-item divided @click.native="logoutFun">退出登录</el-dropdown-item>
@@ -73,8 +74,9 @@ export default {
     return {
       sysName: "Log.Vue",
       sysUserName: "",
+      loginBtnVisible:true,
+      userBtnVisible:false,
       collapsed: false,
-      loginVisible: false,
       logListData: [
         {
           date: "20160502",
@@ -88,7 +90,7 @@ export default {
         },
         {
           date: "20160502",
-          title: "E6更新说明-业务协同",
+          title: "E6更新说明-结算模块",
           iconCls:"el-icon-document"
         }
       ],
@@ -129,10 +131,12 @@ export default {
     if (user) {
       user = JSON.parse(user);
       this.sysUserName = user.username || "";
-      this.userVisible = true;
+      this.loginBtnVisible=false;
+      this.userBtnVisible=true;
+      
     } else {
-      this.sysUserName = "登 陆";
-      this.userVisible = false;
+      this.loginBtnVisible=true;
+      this.userBtnVisible=false;
     }
   }
 };
@@ -147,7 +151,7 @@ export default {
   .header {
     height: 60px;
     line-height: 60px;
-    background: #bbdbfb;
+    background: #5e67e0;
     color: #fff;
     .userinfo {
       text-align: right;
