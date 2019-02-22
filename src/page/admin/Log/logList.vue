@@ -52,9 +52,23 @@
       <el-table-column prop="date" align="center" label="更新时间" width="300"></el-table-column>
       <el-table-column  align="center" label="操作" >
         <template slot-scope="scope">
-            <el-button type="success" icon="el-icon-delete" size="small" @click="edit(scope.$index, scope.row)">编辑</el-button>
-            <el-button type="danger" icon="el-icon-delete" size="small" @click="del(scope.$index, scope.row.name)">删除</el-button>
-        </template>
+  <el-button
+    type="success"
+    icon="el-icon-delete"
+    size="small"
+    @click="
+      $router.push({ path: '/admin/addOrEditLog', query: { 'id': scope.row.id } })
+    "
+    >编辑</el-button
+  >
+  <el-button
+    type="danger"
+    icon="el-icon-delete"
+    size="small"
+    @click="del(scope.$index, scope.row.id)"
+    >删除</el-button
+  >
+</template>
       </el-table-column>
     </el-table>
       <el-pagination
@@ -67,56 +81,6 @@
             :total="length">
             </el-pagination>
     </div>
-    
-    <!--新增用户信息-->
-    <el-dialog title="新增用户信息" :visible="addformVisible"  v-loading="loading"
-           element-loading-text="拼命加载中"
-           element-loading-spinner="el-icon-loading"
-           element-loading-background="rgba(0, 0, 0, 0.8)" class="addArea" modal custom-class="addFormArea" @close="closeForm('addForm')">
-     <el-form :model="addDataForm" class="addForm" :rules="rules" status-icon ref="addForm">
-        <el-form-item label="姓名:" :label-width="formLabelWidth" prop="name">
-          <el-input v-model="addDataForm.name" auto-complete="off" placeholder="请输入姓名"></el-input>
-        </el-form-item>
-        <el-form-item label="地址:" :label-width="formLabelWidth" prop="address">
-          <el-input v-model.number="addDataForm.address" auto-complete="off" placeholder="请输入地址"></el-input>
-        </el-form-item>
-        <el-form-item label="出生日期:" :label-width="formLabelWidth" prop="date">
-          <el-date-picker v-model="addDataForm.date" type="date" placeholder="选择日期"></el-date-picker>
-        </el-form-item>
-     </el-form>
-     <div slot="footer" class="dialog-footer">
-        <el-button @click="addformVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addSure('addForm')">确 定</el-button>
-     </div>
-    </el-dialog> 
-
-
-    <!--编辑用户信息-->
-    <!-- 修改数据 -->
-  <el-dialog title="修改数据" :visible="modifyFormVisible" v-loading="loading"
-           element-loading-text="拼命加载中"
-           element-loading-spinner="el-icon-loading"
-           element-loading-background="rgba(0, 0, 0, 0.8)" class="addArea" modal custom-class="addFormArea" @close="closeForm('modifyForm')">
-  <el-form :model="editDataForm" class="addForm" :rules="rules" status-icon ref="modifyForm">
-
-    <el-form-item label="姓名:" :label-width="formLabelWidth" prop="name">
-      <el-input v-model="editDataForm.name" auto-complete="off" placeholder="请输入姓名"></el-input>
-    </el-form-item>
-
-    <el-form-item label="地址:" :label-width="formLabelWidth" prop="address">
-      <el-input v-model.number="editDataForm.address" auto-complete="off" placeholder="请输入地址"></el-input>
-    </el-form-item>
-
-     <el-form-item label="出生日期:" :label-width="formLabelWidth" prop="date">
-      <el-date-picker v-model="editDataForm.date" type="date" placeholder="选择日期"></el-date-picker>
-    </el-form-item>
-
-  </el-form>
-  <div slot="footer" class="dialog-footer">
-    <el-button @click="modifyFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="modifySure('modifyForm')">确 定</el-button>
-  </div>
-  </el-dialog> 
   </div>
 </template>
 
@@ -134,7 +98,7 @@ export default {
       queryDate: "",
       modifyId: "",
       dialogType: "",
-      logType:0,
+      logType: "",
       currentPage: 1, //当前页数
       pageIndex: 1, //第几页
       pageSize: 5, //每页多少条
@@ -153,7 +117,7 @@ export default {
           label: "系统升级",
           value: 2
         }
-      ], 
+      ],
       // 校验规则
       rules: {
         name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
@@ -269,6 +233,16 @@ export default {
     },
     add() {
       this.addformVisible = true;
+    },
+    del(id) {
+      this.$message({
+        title: "提示",
+        message: "删除成功",
+        type: "success",
+        onClose: function() {
+          that.search();
+        }
+      });
     },
     closeForm(formName) {
       if (this.$refs[formName] != null) {

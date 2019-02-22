@@ -1,11 +1,12 @@
 <template lang="html">
+   
     <section class="form-section">
-    <el-form :model="logDataForm" :rules="rules" ref="logForm" label-width="60px" class="demo-ruleForm">
+         <el-form :model="logDataForm" :rules="rules" ref="logForm" label-width="60px" class="demo-ruleForm">
       <el-form-item label="标题*" prop="title">
         
         <el-input v-model="logDataForm.title"></el-input>
       </el-form-item>
-      <el-form-item label="类型" prop="type">
+      <el-form-item label="类型" prop="type" style="200px">
         <el-select v-model="logDataForm.type" placeholder="请选择日志类型">
           <el-option label="公共" value="1"></el-option>
           <el-option label="系统升级" value="2"></el-option>
@@ -20,10 +21,11 @@
             @change="onEditorChange($event)">
         </quillEditor>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('logForm')">保存</el-button>
-      </el-form-item>
+        <el-form-item class="save-form">
+          <el-button type="primary" @click="submitForm('logForm')">保存</el-button>
+        </el-form-item>
     </el-form>
+      </el-main> 
   </section>
 </template>
 <script>
@@ -63,6 +65,9 @@ export default {
     },
     onEditorChange() {
       //内容改变事件
+    },
+    submitForm(){
+      alert("暂时提交");
     }
   },
   components: {
@@ -78,5 +83,7 @@ export default {
 .quill-editor {
   height: 400px;
 }
-
+.save-form {
+  margin-top: 80px;
+}
 </style>
